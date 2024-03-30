@@ -241,7 +241,7 @@ function postFade()
 		wait(1)
 		isTweening = false
 	end
-	
+
 	local function moveToPosition(position)
 		local Character = game.Players.LocalPlayer.Character
 		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
@@ -370,8 +370,8 @@ function autoTime()
 
 	local LocalPlayer = game.Players.LocalPlayer
 	local char = LocalPlayer.Character
-        local RunService = game:GetService("RunService")
-
+	local RunService = game:GetService("RunService")
+	
 	local goals = {}
 
 	do
@@ -411,7 +411,6 @@ function autoTime()
 	local debounce = true
 
 	RunService.RenderStepped:Connect(function()
-		pcall(function()
 			local Ping = game.Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
 			local goal = Goal(char)
 			local HoopDistance = (char.HumanoidRootPart.Position - goal.Position).Magnitude
@@ -433,7 +432,6 @@ function autoTime()
 				end
 
 			end
-		end)
 	end)
 
 	game.UserInputService.InputBegan:connect(function(input)
@@ -1182,4 +1180,3 @@ PlayerTab:AddSlider({
 
 
 OrionLib:Init()
-
