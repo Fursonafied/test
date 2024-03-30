@@ -370,6 +370,7 @@ function autoTime()
 
 	local LocalPlayer = game.Players.LocalPlayer
 	local char = LocalPlayer.Character
+        local RunService = game:GetService("RunService")
 
 	local goals = {}
 
@@ -409,7 +410,7 @@ function autoTime()
 
 	local debounce = true
 
-	game:GetService("RunService").RenderStepped:Connect(function()
+	RunService.RenderStepped:Connect(function()
 		pcall(function()
 			local Ping = game.Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
 			local goal = Goal(char)
