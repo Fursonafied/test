@@ -409,7 +409,7 @@ function autoTime()
 
 	local debounce = true
 
-	game.RunService.RenderStepped:Connect(function()
+	game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
 			local Ping = game.Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
 			local goal = Goal(char)
