@@ -1,0 +1,1185 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "CookieHub V1", HidePremium = false, IntroEnabled = false,IntroText = "Cookie Hub", SaveConfig = true, ConfigFolder = "OrionTest"})
+
+--Values
+_G.deepShooter = true
+_G.insideShooter = true
+_G.postHook = true
+_G.postFade = true
+_G.layup = true
+_G.antiKick = true
+_G.autoHop = true
+_G.passing = true
+_G.secondChance = true
+_G.acrobat = true
+_G.offDribble = true
+_G.sprintLoop = true
+
+--Functions
+
+function deepShooter()
+	local tweenspeed = 15
+	local isRunning = true -- Start the script by default
+	local isTweening = false
+
+	getgenv().ShotClockToShootAt = _G.shotDelay
+
+	local function tweenplayer(cframe)
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character
+		isTweening = true
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+		wait(1)
+		isTweening = false
+	end
+
+	local function moveToPosition(targetPosition)
+		game.Players.LocalPlayer.Character.Humanoid:MoveTo(targetPosition)
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.deepShooter == true do
+		if isRunning then
+			for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToShootAt then
+					tweenplayer(CFrame.new(-649, 9, 215))
+					wait(1)
+					local args = {
+						[1] = "Shoot",
+						[2] = true
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+					wait(2)
+
+					local startTime = tick()
+					repeat
+						-- Adjust the walking behavior here (e.g., walking in a circle)
+						local theta = (tick() - startTime) * math.pi * 2 / 5  -- Adjust the 5 to change the duration of the circle
+						local radius = 6  -- Adjust the radius of the circle
+						local x = -649 + radius * math.cos(theta)
+						local z = 215 + radius * math.sin(theta)
+						moveToPosition(Vector3.new(x, 9, z))
+						wait()
+					until tick() - startTime >= 7
+				end
+			end
+		end
+		wait()
+	end
+end
+
+function insideShooter()
+	local tweenspeed = 15
+	local isRunning = true -- Start the script by default
+	local isTweening = false
+
+	getgenv().ShotClockToShootAt = _G.shotDelay
+
+	local function tweenplayer(cframe)
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character
+		isTweening = true
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+		wait(1)
+		isTweening = false
+	end
+
+	local function moveToPosition(targetPosition)
+		game.Players.LocalPlayer.Character.Humanoid:MoveTo(targetPosition)
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.insideShooter == true do
+		if isRunning then
+			for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToShootAt then
+					tweenplayer(CFrame.new(-616, 9, 193))
+					wait(0.2)
+					local args = {
+						[1] = "Shoot",
+						[2] = true
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+					wait(2)
+
+					local startTime = tick()
+					repeat
+						-- Adjust the walking behavior here (e.g., walking in a circle)
+						local theta = (tick() - startTime) * math.pi * 2 / 5  -- Adjust the 5 to change the duration of the circle
+						local radius = 6  -- Adjust the radius of the circle
+						local x = -637 + radius * math.cos(theta)
+						local z = 193 + radius * math.sin(theta)
+						moveToPosition(Vector3.new(x, 9, z))
+						wait()
+					until tick() - startTime >= 7
+				end
+			end
+		end
+		wait()
+	end
+end
+
+
+function postHook() 
+	local tweenspeed = 15
+
+	getgenv().ShotClockToShootAt = _G.shotDelay
+
+	local function tweenplayer(cframe)
+		repeat 
+			wait() 
+		until game.Players.LocalPlayer.Character
+		local isTweening = true
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+		wait(1)
+		isTweening = false
+	end
+
+	local function moveToPosition(position)
+		local Character = game.Players.LocalPlayer.Character
+		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+		if Humanoid then
+			Humanoid:MoveTo(position)
+		end
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.postHook == true do
+		for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+			if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToShootAt then
+				tweenplayer(CFrame.new(-616, 9, 202))
+				wait(0.3)
+				local args = {
+					[1] = "Post",
+					[2] = true
+				}
+				game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+
+				wait(1.5)
+
+				local args = {
+					[1] = "Shoot",
+					[2] = true
+				}
+				game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+				local args = {
+					[1] = "Shoot",
+					[2] = true
+				}
+				game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+
+				local startTime = tick()
+				repeat
+					-- Adjust the walking behavior here (e.g., walking in a circle)
+					local theta = (tick() - startTime) * math.pi * 2 / 5  
+					local radius = 6  -- Adjust the radius of the circle
+					local x = -637 + radius * math.cos(theta)
+					local z = 202 + radius * math.sin(theta)
+					moveToPosition(Vector3.new(x, 9, z))
+					wait()
+				until tick() - startTime >= 7
+			end
+		end
+		wait()
+	end
+end
+
+function postFade()
+	local tweenspeed = 15
+
+	getgenv().ShotClockToShootAt = _G.shotDelay
+
+	local function tweenplayer(cframe)
+		repeat 
+			wait() 
+		until game.Players.LocalPlayer.Character
+		local isTweening = true
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+		wait(1)
+		isTweening = false
+	end
+	
+	local function moveToPosition(position)
+		local Character = game.Players.LocalPlayer.Character
+		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+		if Humanoid then
+			Humanoid:MoveTo(position)
+		end
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.postFade == true do
+		for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+			if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToShootAt then    
+				tweenplayer(CFrame.new(-616, 9, 202))
+				wait(0.3)
+				local args = {
+					[1] = "Post",
+					[2] = true
+				}
+				game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+
+				wait(1.5)
+
+				local args = {
+					[1] = "Shoot",
+					[2] = true
+				}
+				game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+
+				local startTime = tick()
+				repeat
+					-- Adjust the walking behavior here (e.g., walking in a circle)
+					local theta = (tick() - startTime) * math.pi * 2 / 5  
+					local radius = 6  -- Adjust the radius of the circle
+					local x = -637 + radius * math.cos(theta)
+					local z = 202 + radius * math.sin(theta)
+					moveToPosition(Vector3.new(x, 9, z))
+					wait()
+				until tick() - startTime >= 7
+			end
+		end
+		wait()
+	end
+end
+
+function layup()
+	local tweenspeed = 15
+	local walkspeed = 16  -- Adjust walkspeed as needed
+	local isRunning = true  -- Auto start without toggle
+	local isTweening = false
+	local lastTweenTime = 0
+	local tweenCooldown = 3
+
+	getgenv().ShotClockToShootAt = _G.shotDelay
+
+	local function tweenPlayer(cframe)
+		repeat wait() until game.Players.LocalPlayer.Character
+		isTweening = true
+
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+
+		wait(1)
+		isTweening = false
+	end
+
+	local function moveToPosition(position)
+		local Character = game.Players.LocalPlayer.Character
+		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+		if Humanoid then
+			Humanoid:MoveTo(position)
+		end
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.layup == true do
+		if isRunning then
+			for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToShootAt then    
+					local currentTime = tick()
+					if currentTime - lastTweenTime >= tweenCooldown then
+						tweenPlayer(CFrame.new( -616, 9, 198))
+						lastTweenTime = tick()
+					end
+					wait(0.00000000000000001)  -- Adjust this wait time as needed
+					moveToPosition(Vector3.new(-616, 9, 215))
+
+					local args = {
+						[1] = "Shoot",
+						[2] = true
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+
+					-- Walk in a circle for 5 seconds after shooting
+					local startTime = tick()
+					repeat
+						-- Adjust the walking behavior here (e.g., walking in a circle)
+						local theta = (tick() - startTime) * math.pi * 2 / 5  -- Adjust the 5 to change the duration of the circle
+						local radius = 6  -- Adjust the radius of the circle
+						local x = -616 + radius * math.cos(theta)
+						local z = 215 + radius * math.sin(theta)
+						moveToPosition(Vector3.new(x, 9, z))
+						wait()
+					until tick() - startTime >= 7
+				end
+			end
+		end
+		wait()
+	end
+end
+
+function autoTime()
+
+
+	local LocalPlayer = game.Players.LocalPlayer
+	local char = LocalPlayer.Character
+
+	local goals = {}
+
+	do
+		local a = workspace:GetDescendants()
+
+		for x = 1, #a do
+			if (a[x]:IsA("Part") and a[x].Name == "Goal") then
+				table.insert(goals, a[x])
+			end
+		end
+	end
+
+
+	local function Goal(CHAR)
+
+		local root = char.HumanoidRootPart
+		local D = {}
+
+		for _, goal in pairs(goals) do
+			table.insert(D, (root.Position - goal.Position).magnitude)
+		end
+
+		local closegoal = math.min(unpack(D))
+
+		for _, goal in pairs(goals) do
+			local d = (root.Position - goal.Position).magnitude
+
+
+			if (d == closegoal) then
+				return goal
+			end
+		end
+	end
+
+	local Time
+
+	local debounce = true
+
+	game.RunService.RenderStepped:Connect(function()
+		pcall(function()
+			local Ping = game.Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
+			local goal = Goal(char)
+			local HoopDistance = (char.HumanoidRootPart.Position - goal.Position).Magnitude
+
+			Time = math.max(0, 0.74 - ((Ping - 50)/204.08163))
+			local LayupTime = Time
+
+			if debounce == true then
+
+				if HoopDistance > 20 then
+					if game.Players.LocalPlayer.Character:FindFirstChild("ShotMeterTiming").Value >= Time then
+						game.ReplicatedStorage.GameEvents.ClientAction:FireServer("Shoot", false)
+					end
+				else
+					if game.Players.LocalPlayer.Character:FindFirstChild("ShotMeterTiming").Value >= LayupTime then
+						game.ReplicatedStorage.GameEvents.ClientAction:FireServer("Shoot", false)
+					end
+
+				end
+
+			end
+		end)
+	end)
+
+	game.UserInputService.InputBegan:connect(function(input)
+		if input.KeyCode == Enum.KeyCode.F then
+			debounce = false
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "Script Notification",
+				Text = "autoTimeoff you trash bitch",
+				Duration = 5
+			})
+		end
+	end)
+
+	game.UserInputService.InputBegan:connect(function(input)
+		if input.KeyCode == Enum.KeyCode.B then
+			debounce = true
+			game:GetService("StarterGui"):SetCore("SendNotification", {
+				Title = "Script Notification",
+				Text = "autoTimeOn you trash bitch",
+				Duration = 5
+			})
+		end
+	end)
+end
+
+function fpsBoost()
+	repeat wait() until game:IsLoaded()
+	pcall(function()
+
+		local All_Name = {"Part", "MeshPart", "UnionOperation", "WedgePart"}
+
+		if 8448881160 == game.PlaceId then --plaza
+
+			for key, value in pairs(workspace.Plaza["Misc."].Concrete:GetDescendants()) do
+				for i,v in pairs(All_Name) do 
+					if v == value.ClassName then
+						value.Transparency = 1
+					end
+				end
+			end
+
+
+			for key, value in pairs(workspace.Plaza["Misc."].Path:GetDescendants()) do
+				for i,v in pairs(All_Name) do 
+					if v == value.ClassName then
+						value.Transparency = 1
+					end
+				end
+			end
+
+
+			game:FindFirstChildOfClass("Workspace").Plaza.Court:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza.Billboards:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Store Doors"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Prop Buildings"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Plaza Lights"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Store Designs"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza.Scenery:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."].Buildings:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."].Benches:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."]["Game Sign"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."].Crosswalks:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."]["Short Pole"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."]["Trash Cans"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."].Fountain:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."].Grass:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."].Wood:Destroy()
+			game:FindFirstChildOfClass("Workspace").Plaza["Misc."].Lines:Destroy()
+
+		elseif 8657449735 == game.PlaceId then --gym
+
+			for key, value in pairs(workspace.Building:GetDescendants()) do
+				for i,v in pairs(All_Name) do 
+					if v == value.ClassName then
+						value.Transparency = 1
+					end
+				end
+			end
+
+
+			for key, value in pairs(workspace:GetDescendants()) do
+				if value.Name == "Net" then
+					value:Destroy()
+				end
+			end
+
+			game:FindFirstChildOfClass("Workspace")["Fake Plaza"]:Destroy()
+
+		elseif 10107441386 == game.PlaceId then --park
+
+			for key, value in pairs(workspace.Park.Ground:GetDescendants()) do
+				for i,v in pairs(All_Name) do 
+					if v == value.ClassName then
+						value.Transparency = 1
+					end
+				end
+			end
+
+
+			for key, value in pairs(workspace:GetDescendants()) do
+				if value.Name == "Net" then
+					value:Destroy()
+				end
+			end
+
+			game:FindFirstChildOfClass("Workspace").Park.Lights:Destroy()
+			game:FindFirstChildOfClass("Workspace").Park["Prop Lights"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Park["Path Walls"]:Destroy()
+			game:FindFirstChildOfClass("Workspace").Park.Benches:Destroy()
+			game:FindFirstChildOfClass("Workspace").Park.Borders:Destroy()
+			game:FindFirstChildOfClass("Workspace").Park["Trash Cans"]:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Fake Plaza"]:Destroy()
+
+		elseif 9336911238 == game.PlaceId then -- playnow
+
+			for key, value in pairs(workspace.Arena:GetDescendants()) do
+				for i,v in pairs(All_Name) do 
+					if v == value.ClassName then
+						value:Destroy()
+					end
+				end
+			end
+
+			for key, value in pairs(workspace:GetDescendants()) do
+				if value.Name == "Net" then
+					value:Destroy()
+				end
+			end
+
+		elseif 10207014047 == game.PlaceId then -- rec lobby
+
+			for key, value in pairs(workspace["Rec Lobby"].Floor:GetDescendants()) do
+				for i,v in pairs(All_Name) do 
+					if v == value.ClassName then
+						value.Transparency = 1
+					end
+				end
+			end
+
+			game:FindFirstChildOfClass("Workspace")["Fake Plaza"]:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Rec Lobby"]["Trash Can"]:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Rec Lobby"].Posters:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Rec Lobby"].Outlets:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Rec Lobby"]["Waiting Area"]:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Rec Lobby"].Plants:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Rec Lobby"].Vents:Destroy()
+			game:FindFirstChildOfClass("Workspace")["Rec Lobby"].Lights:Destroy()
+
+		else -- rec fps (casual/comp)
+
+			for key, value in pairs(workspace:GetDescendants()) do
+				if value.Name == "Net" then
+					value:Destroy()
+				end
+			end
+
+			game:FindFirstChildOfClass("Workspace").Gym:Destroy()
+
+		end
+	end)
+end
+
+function rebound()
+	local Players = game:GetService("Players")
+	local Player = Players.LocalPlayer
+	local Character = Player.Character or Player.CharacterAdded:Wait()
+	local Humanoid = Character:WaitForChild("Humanoid")
+	local Root = Character:WaitForChild("HumanoidRootPart")
+	local Workspace = game:GetService("Workspace")
+	local RunService = game:GetService("RunService")
+
+	local Ball = nil
+
+	-- Function to find the basketball in the workspace
+	local function findBasketball()
+		Ball = Workspace:FindFirstChild("Basketball")
+		if Ball then
+			return true
+		else
+			return false
+		end
+	end
+
+	-- Function to move the character towards the basketball position
+	local function moveToBasketball()
+		if not Ball then
+			if not findBasketball() then
+				print("Basketball not found")
+				return
+			end
+		end
+
+		-- Check if the player is holding the ball
+		local isHoldingBall = Ball:GetAttribute("Controller") == Player.Name
+		if not isHoldingBall then
+			local BallPosition = Ball.Position
+			Humanoid:MoveTo(BallPosition)
+		end
+	end
+
+	-- Connect to the heartbeat event to continuously move towards the basketball position
+	RunService.Heartbeat:Connect(function()
+		moveToBasketball()
+
+		-- Check if the ball has respawned
+		if not Ball or not Ball.Parent then
+			print("Ball has respawned. Finding new ball...")
+			findBasketball()
+		end
+	end)
+end
+
+function antiKick()
+	local isRunning = false
+
+	local function walkInCircle(center, radius)
+		local angle = 0
+		local character = game.Players.LocalPlayer.Character
+		local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+		if not humanoid then
+			return
+		end
+
+		while isRunning do
+			angle = angle + 0.1
+			local circlePosition = center + Vector3.new(math.cos(angle) * radius, 0, math.sin(angle) * radius)
+			humanoid:MoveTo(circlePosition)
+			wait(0.1)
+		end
+	end
+
+	local function notify(message)
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Script Notification",
+			Text = message,
+			Duration = 5
+		})
+	end
+
+	local function handleToggleCommand()
+		isRunning = not isRunning
+		if isRunning then
+			notify("AFK ON")
+		else
+			notify("AFK OFF.")
+		end
+	end
+
+
+	game:GetService("UserInputService").InputBegan:Connect(function(input)
+		if input.KeyCode == Enum.KeyCode.K then
+			handleToggleCommand()
+		end
+	end)
+
+	-- Main loop
+	while true do
+		if isRunning then
+			walkInCircle(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, 6) -- Change 10 to adjust the radius of the circle
+		end
+		wait()
+	end
+end
+
+function infYield()
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()
+end
+
+function autoHop()
+	local Players = game:GetService("Players")
+	local TweenService = game:GetService("TweenService")
+
+	local player = Players.LocalPlayer
+	local character = player.Character or player.CharacterAdded:Wait()
+	local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+	local humanoid = character:WaitForChild("Humanoid")
+
+	local targetPosition = Vector3.new(-567, 9, 179)
+	local proximityPosition = Vector3.new(-663, 9, 196)
+	local proximityThreshold = 10  -- Adjust the proximity threshold as needed
+
+	local function tweenPlayerToPosition(target)
+		local distance = (target - humanoidRootPart.Position).Magnitude
+		local tweenInfo = TweenInfo.new(distance / 15, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local objectives = {CFrame = CFrame.new(target)}
+		local tween = TweenService:Create(humanoidRootPart, tweenInfo, objectives)
+		tween:Play()
+		tween.Completed:Wait()
+	end
+
+	local function invokeServer()
+		local args = {
+			[1] = "Join",
+			[2] = "6"
+		}
+		game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Courts"):InvokeServer(unpack(args))
+	end
+
+	while _G.autoHop == true do
+		local distanceToProximityPosition = (proximityPosition - humanoidRootPart.Position).Magnitude
+		if distanceToProximityPosition <= proximityThreshold then
+			tweenPlayerToPosition(targetPosition)
+			invokeServer()
+		end
+		wait(0.5)  -- Adjust the frequency of checking the proximity position as needed
+	end
+end
+
+function passing()
+	local Target = _G.passing -- Pass to whoever
+	local Target2 = "xxx" -- If you're the bot then pass to this person instead
+	local Bot = false -- Determines whether the account you execute this on is the bot or not
+
+	getgenv().ShotClockToPassAt = _G.passingDelay -- Passes after the shotclock goes below this number
+
+
+
+
+
+	game:GetService("RunService").Stepped:Connect(function()
+		if _G.Enabled == false then return end
+
+		if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToPassAt and Bot == false then
+			table = {[1] = true, [2] = workspace[Target]}
+			game:GetService("ReplicatedStorage").GameEvents.ClientAction:FireServer("Icon Pass", table)
+		elseif game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToPassAt and Bot == true then
+			table = {[1] = true, [2] = workspace[Target2]}
+			game:GetService("ReplicatedStorage").GameEvents.ClientAction:FireServer("Icon Pass", table)
+		end
+	end)
+end
+
+
+
+function secondChance()
+	local tweenspeed = 11
+	local isRunning = true -- Start the script by default
+	local isTweening = false
+
+	local function tweenplayer(cframe)
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character
+		isTweening = true
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+		wait(1)
+		isTweening = false
+	end
+
+	local function moveToPosition(targetPosition)
+		game.Players.LocalPlayer.Character.Humanoid:MoveTo(targetPosition)
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.secondChance == true do
+		if isRunning then
+			for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if v.Name == "ball.weld" then
+					tweenplayer(CFrame.new(-616, 9, 209))
+					wait(0.2)
+					local args = {
+						[1] = "Shoot",
+						[2] = true
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+					-- Walk in a circle for 5 seconds after shooting
+					local startTime = tick()
+					repeat
+						-- Adjust the walking behavior here (e.g., walking in a circle)
+						local theta = (tick() - startTime) * math.pi * 2 / 5  -- Adjust the 5 to change the duration of the circle
+						local radius = 8  -- Adjust the radius of the circle
+						local x = -616 + radius * math.cos(theta)
+						local z = 209 + radius * math.sin(theta)
+						moveToPosition(Vector3.new(x, 9, z))
+						wait()
+					until tick() - startTime >= 5
+				end
+			end
+		end
+		wait()
+	end
+end
+
+function acrobat()
+	local tweenspeed = 15
+	local walkspeed = 16  -- Adjust walkspeed as needed
+	local isRunning = true  -- Auto start without toggle
+	local isTweening = false
+	local lastTweenTime = 0
+	local tweenCooldown = 3
+
+	getgenv().ShotClockToShootAt = _G.shotDelay
+
+	local function tweenPlayer(cframe)
+		repeat wait() until game.Players.LocalPlayer.Character
+		isTweening = true
+
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+
+		wait(1)
+		isTweening = false
+	end
+
+	local function moveToPosition(position)
+		local Character = game.Players.LocalPlayer.Character
+		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+		if Humanoid then
+			Humanoid:MoveTo(position)
+		end
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.acrobat == true do
+		if isRunning then
+			for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToShootAt then        
+					local currentTime = tick()
+					if currentTime - lastTweenTime >= tweenCooldown then
+						tweenPlayer(CFrame.new(-615, 9, 201))
+						lastTweenTime = tick()
+					end
+					wait(0.2)  -- Adjust this wait time as needed
+					moveToPosition(Vector3.new(-602, 9, 209))
+					local args = {
+						[1] = "Sprint",
+						[2] = true
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+					wait(0.1)
+					local args = {
+						[1] = "Shoot",
+						[2] = true
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+					wait(1.7)
+					local stopSprintArgs = {
+						[1] = "Sprint",
+						[2] = false
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(stopSprintArgs))
+
+					-- Walk in a circle for 5 seconds after shooting
+					local startTime = tick()
+					repeat
+						-- Adjust the walking behavior here (e.g., walking in a circle)
+						local theta = (tick() - startTime) * math.pi * 2 / 5  -- Adjust the 5 to change the duration of the circle
+						local radius = 6  -- Adjust the radius of the circle
+						local x = -605 + radius * math.cos(theta)
+						local z = 211 + radius * math.sin(theta)
+						moveToPosition(Vector3.new(x, 9, z))
+						wait()
+					until tick() - startTime >= 5
+				end
+			end
+		end
+		wait()
+	end
+end
+
+function offDribble()
+	local tweenspeed = 15
+	local walkspeed = 16  -- Adjust walkspeed as needed
+	local isRunning = true  -- Auto start without toggle
+	local isTweening = false
+	local lastTweenTime = 0
+	local tweenCooldown = 3
+
+	getgenv().ShotClockToShootAt = _G.shotDelay
+
+	local function tweenPlayer(cframe)
+		repeat wait() until game.Players.LocalPlayer.Character
+		isTweening = true
+
+		repeat
+			wait()
+		until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+		local TweenInfo = TweenInfo.new(((cframe.p - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude) / tweenspeed, Enum.EasingStyle.Linear, Enum.EasingDirection.Out, 0, false)
+		local Objective = {CFrame = cframe}
+		local TweenPlayer = game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo, Objective)
+		TweenPlayer:Play()
+		TweenPlayer.Completed:Wait()
+
+		wait(1)
+		isTweening = false
+	end
+
+	local function moveToPosition(position)
+		local Character = game.Players.LocalPlayer.Character
+		local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid")
+		if Humanoid then
+			Humanoid:MoveTo(position)
+		end
+	end
+
+	repeat
+		wait(1)
+	until game:IsLoaded()
+
+	while _G.offDribble == true do
+		if isRunning then
+			for _, v in pairs(workspace[game.Players.LocalPlayer.Name]:GetDescendants()) do
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("ball.weld") and tonumber(game:GetService("Players").LocalPlayer.PlayerGui.GameUI.Main.Scoreboard.Bottom.Shotclock.ContentText) < getgenv().ShotClockToShootAt then
+					local currentTime = tick()
+					if currentTime - lastTweenTime >= tweenCooldown then
+						tweenPlayer(CFrame.new(-616, 9, 184))
+						lastTweenTime = tick()
+					end
+					wait(0.2)  -- Adjust this wait time as needed
+					moveToPosition(Vector3.new(-616, 9, 193))
+
+					local args = {
+						[1] = "Shoot",
+						[2] = true
+					}
+					game:GetService("ReplicatedStorage"):WaitForChild("GameEvents"):WaitForChild("ClientAction"):FireServer(unpack(args))
+
+					-- Walk in a circle for 5 seconds after shooting
+					local startTime = tick()
+					repeat
+						-- Adjust the walking behavior here (e.g., walking in a circle)
+						local theta = (tick() - startTime) * math.pi * 2 / 5  -- Adjust the 5 to change the duration of the circle
+						local radius = 6  -- Adjust the radius of the circle
+						local x = -616 + radius * math.cos(theta)
+						local z = 193 + radius * math.sin(theta)
+						moveToPosition(Vector3.new(x, 9, z))
+						wait()
+					until tick() - startTime >= 5
+				end
+			end
+		end
+		wait()
+	end
+end
+
+
+
+-- Tabs
+local BadgeTab = Window:MakeTab({
+	Name = "AutoBadge",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local MiscTab = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+-- Toggles
+BadgeTab:AddSlider({
+	Name = "Shot Delay",
+	Min = 5,
+	Max = 24,
+	Defaul= 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "DELAY",
+	Callback = function(Value)
+		_G.shotDelay = Value
+
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Deep Shooter",
+	Default = false,
+	Callback = function(Value)
+		_G.deepShooter = Value
+		deepShooter()
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Inside Shooter",
+	Default = false,
+	Callback = function(Value)
+		_G.insideShooter = Value
+		insideShooter()
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Post Hook",
+	Default = false,
+	Callback = function(Value)
+		_G.postHook = Value
+		postHook()
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Post Fade",
+	Default = false,
+	Callback = function(Value)
+		_G.postFade = Value
+		postFade()
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Layup",
+	Default = false,
+	Callback = function(Value)
+		_G.layup = Value
+		layup()
+	end    
+})
+
+
+PlayerTab:AddToggle({
+	Name = "Auto Hop On",
+	Default = false,
+	Callback = function(Value)
+		_G.autoHop = Value
+		autoHop()
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Second Chance/Rebound Method",
+	Default = false,
+	Callback = function(Value)
+		_G.secondChance = Value
+		secondChance()
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Acrobat",
+	Default = false,
+	Callback = function(Value)
+		_G.acrobat = Value
+		acrobat()
+	end    
+})
+
+BadgeTab:AddToggle({
+	Name = "Off Dribble",
+	Default = false,
+	Callback = function(Value)
+		_G.offDribble = Value
+		offDribble()
+	end    
+})
+
+
+
+
+
+-- Buttons
+PlayerTab:AddButton({
+	Name = "Auto Time",
+	Callback = function()
+		autoTime()
+	end    
+})
+
+PlayerTab:AddButton({
+	Name = "Auto Rebound",
+	Callback = function()
+		rebound()
+	end    
+})
+
+MiscTab:AddButton({
+	Name = "FPS Boost",
+	Callback = function()
+		fpsBoost()
+	end    
+})
+
+MiscTab:AddButton({
+	Name = "Inf Yield",
+	Callback = function()
+		infYield()
+	end    
+})
+
+
+
+MiscTab:AddButton({
+	Name = "Anti Kick (K Toggle)",
+	Callback = function()
+		antiKick()
+	end
+})
+
+-- TextBox
+PlayerTab:AddTextbox({
+	Name = "Pass",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		_G.passing = Value
+		passing()
+	end	  
+})
+
+
+-- Slider
+PlayerTab:AddSlider({
+	Name = "Passing Delay",
+	Min = 5,
+	Max = 24,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "DELAY",
+	Callback = function(Value)
+		_G.passingDelay = Value
+
+	end    
+})
+
+
+
+
+OrionLib:Init()
+
