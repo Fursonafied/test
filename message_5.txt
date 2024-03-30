@@ -691,7 +691,7 @@ function antiKick()
 	-- Main loop
 	while true do
 		if isRunning then
-			walkInCircle(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, 6) -- Change 10 to adjust the radius of the circle
+			walkInCircle(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, 8) -- Change 10 to adjust the radius of the circle
 		end
 		wait()
 	end
