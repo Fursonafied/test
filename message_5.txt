@@ -1168,7 +1168,7 @@ PlayerTab:AddSlider({
 	Name = "Passing Delay",
 	Min = 5,
 	Max = 24,
-	Default = 5,
+	Default = 22,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 1,
 	ValueName = "DELAY",
