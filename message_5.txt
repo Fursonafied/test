@@ -419,7 +419,7 @@ function autoTime()
 			local LayupTime = Time
 
 			if debounce == true then
-
+			if game.Players.LocalPlayer.Character:FindFirstChild("ShotMeterTiming") then
 				if HoopDistance > 20 then
 					if game.Players.LocalPlayer.Character:FindFirstChild("ShotMeterTiming").Value >= Time then
 						game.ReplicatedStorage.GameEvents.ClientAction:FireServer("Shoot", false)
@@ -430,6 +430,7 @@ function autoTime()
 					end
 
 				end
+			end
 
 			end
 	end)
