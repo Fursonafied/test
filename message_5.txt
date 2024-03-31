@@ -620,7 +620,6 @@ function rebound()
 	local function moveToBasketball()
 		if not Ball then
 			if not findBasketball() then
-				print("Basketball not found")
 				return
 			end
 		end
@@ -639,7 +638,6 @@ function rebound()
 
 		-- Check if the ball has respawned
 		if not Ball or not Ball.Parent then
-			print("Ball has respawned. Finding new ball...")
 			findBasketball()
 		end
 	end)
